@@ -1,0 +1,55 @@
+{
+  "properties": [
+    {
+      "name": "mindrails.provider.encryption-key",
+      "type": "java.lang.String",
+      "description": "Base64 key material used to encrypt provider credentials.",
+      "sourceType": "com.mindrails.backend.provider.ProviderSecrets"
+    },
+    {
+      "name": "mindrails.cors.allowed-origins",
+      "type": "java.lang.String",
+      "description": "Fallback origin list for mindrails.identity.allowed-origins.",
+      "sourceType": "com.mindrails.backend.common.config.RestCorsConfiguration"
+    },
+    {
+      "name": "mindrails.tasks.cron-zone",
+      "type": "java.lang.String",
+      "description": "Time zone used to schedule task cron expressions.",
+      "sourceType": "com.mindrails.backend.agent.service.internal.CronjobManager",
+      "defaultValue": "Asia/Shanghai"
+    },
+    {
+      "name": "mindrails.tasks.execution-timeout",
+      "type": "java.time.Duration",
+      "description": "Maximum duration of a task execution.",
+      "sourceType": "com.mindrails.backend.agent.service.internal.DefaultTaskExecutionService",
+      "defaultValue": "PT30M"
+    },
+    {
+      "name": "mindrails.agent-memory.migrate.agent-id",
+      "type": "java.lang.String",
+      "description": "Agent UUID selected for command-line memory migration.",
+      "sourceType": "com.mindrails.backend.memory.agent.AgentMemoryMigration"
+    },
+    {
+      "name": "mindrails.agent-memory.migrate.source",
+      "type": "java.lang.String",
+      "description": "Source store for command-line agent memory migration.",
+      "sourceType": "com.mindrails.backend.memory.agent.AgentMemoryMigration",
+      "defaultValue": "qdrant"
+    },
+    {
+      "name": "mindrails.agent-memory.migrate.source-collection",
+      "type": "java.lang.String",
+      "description": "Legacy Qdrant collection read by the command-line agent memory migration.",
+      "sourceType": "com.mindrails.backend.memory.agent.AgentMemoryMigration"
+    },
+    {
+      "name": "mindrails.logging.error-file",
+      "type": "java.lang.String",
+      "description": "Error log path read by logback-spring.xml.",
+      "defaultValue": "./mindrails-error.log"
+    }
+  ]
+}

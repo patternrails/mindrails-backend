@@ -1,0 +1,6 @@
+{
+  "name": "Travel assistant",
+  "description": "Helps plan trips",
+  "goal": "Help me organize travel",
+  "systemMessage": "Compare options before booking"
+}

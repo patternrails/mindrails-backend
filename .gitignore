@@ -1,0 +1,36 @@
+.gradle/
+build/
+out/
+
+.idea/
+*.iml
+
+.DS_Store
+*.log
+mindrails-error.log.*.gz
+.env
+.env.*
+/local_test.env
+db/backups/
+
+# Runtime storage, user workspaces and local deployment settings
+/data/
+/users/
+/brand_new_data/
+/data_backup/
+/local_dev_env.sh
+/local_brand_new_dev_env.sh
+/docker-compose.override.yaml
+/production.env
+*.env
+!backend.env.example
+
+# Local skills, scripts, notes, and MCP development files
+/skills/
+/brand_new_skill/
+/scripts/
+/notes/
+/mcp/
+
+# Generated standalone diagrams and previews in the repository root
+/*.html

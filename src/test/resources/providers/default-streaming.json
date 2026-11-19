@@ -1,0 +1,17 @@
+{
+  "defaultProvider": "second",
+  "providers": [
+    {
+      "name": "first",
+      "chatModel": "OpenAi",
+      "apiKey": "test-key",
+      "modelName": "test-model"
+    },
+    {
+      "name": "second",
+      "chatModel": "OpenAi",
+      "apiKey": "test-key",
+      "modelName": "test-model"
+    }
+  ]
+}

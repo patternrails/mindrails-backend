@@ -1,0 +1,7 @@
+{
+  "name": "Updated travel assistant",
+  "description": "Plans family trips",
+  "goal": "Help organize family travel",
+  "systemMessage": "Confirm before booking",
+  "status": "ARCHIVED"
+}

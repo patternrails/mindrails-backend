@@ -1,0 +1,57 @@
+{
+  "defaultProvider": "deepseek-non-streaming",
+  "providers": [
+    {
+      "name": "openai",
+      "chatModel": "OpenAi",
+      "streaming": true,
+      "baseUrl": "https://api.openai.com/v1",
+      "apiKey": null,
+      "modelName": "gpt-6-luna",
+      "reasoning": true,
+      "thinkingLevel": "medium",
+      "modelCost": null,
+      "contextWindow": 1050000,
+      "maxTokens": 16384
+    },
+    {
+      "name": "deepseek",
+      "chatModel": "OpenAiCompiable",
+      "streaming": true,
+      "baseUrl": "https://api.deepseek.com",
+      "apiKey": null,
+      "modelName": "deepseek-flash",
+      "reasoning": true,
+      "thinkingLevel": "high",
+      "modelCost": null,
+      "contextWindow": 1000000,
+      "maxTokens": 16384
+    },
+    {
+      "name": "openai-non-streaming",
+      "chatModel": "OpenAi",
+      "streaming": false,
+      "baseUrl": "https://api.openai.com/v1",
+      "apiKey": null,
+      "modelName": "gpt-6-luna",
+      "reasoning": true,
+      "thinkingLevel": "medium",
+      "modelCost": null,
+      "contextWindow": 1050000,
+      "maxTokens": 16384
+    },
+    {
+      "name": "deepseek-non-streaming",
+      "chatModel": "OpenAiCompiable",
+      "streaming": false,
+      "baseUrl": "https://api.deepseek.com",
+      "apiKey": null,
+      "modelName": "deepseek-flash",
+      "reasoning": true,
+      "thinkingLevel": "high",
+      "modelCost": null,
+      "contextWindow": 1000000,
+      "maxTokens": 16384
+    }
+  ]
+}

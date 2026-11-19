@@ -1,0 +1,95 @@
+{
+  "defaultProvider": "OpenAi-stream",
+  "providers": [
+    {
+      "name": "OpenAi-stream",
+      "chatModel": "OpenAi",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": true,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    },
+    {
+      "name": "OpenAi-sync",
+      "chatModel": "OpenAi",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": false,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    },
+    {
+      "name": "OpenAiCompiable-stream",
+      "chatModel": "OpenAiCompiable",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": true,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    },
+    {
+      "name": "OpenAiCompiable-sync",
+      "chatModel": "OpenAiCompiable",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": false,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    },
+    {
+      "name": "Anthropic-stream",
+      "chatModel": "Anthropic",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": true,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    },
+    {
+      "name": "Anthropic-sync",
+      "chatModel": "Anthropic",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": false,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    },
+    {
+      "name": "GoogleAiGemini-stream",
+      "chatModel": "GoogleAiGemini",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": true,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    },
+    {
+      "name": "GoogleAiGemini-sync",
+      "chatModel": "GoogleAiGemini",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": false,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    },
+    {
+      "name": "Qwen-stream",
+      "chatModel": "Qwen",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": true,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    },
+    {
+      "name": "Qwen-sync",
+      "chatModel": "Qwen",
+      "apiKey": "test-key",
+      "modelName": "test-model",
+      "streaming": false,
+      "baseUrl": "https://example.com",
+      "maxTokens": 4096
+    }
+  ]
+}

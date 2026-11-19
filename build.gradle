@@ -1,0 +1,113 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.1'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.mindrails'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.apache.tika:tika-core:3.2.3'
+    implementation 'org.jsoup:jsoup:1.23.2'
+    implementation 'org.yaml:snakeyaml'
+    implementation 'org.apache.pdfbox:pdfbox:3.0.5'
+    implementation 'org.apache.poi:poi-ooxml:5.4.1'
+    implementation 'org.springframework:spring-jdbc'
+    implementation 'com.zaxxer:HikariCP'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'dev.langchain4j:langchain4j:1.20.0'
+    implementation 'dev.langchain4j:langchain4j-skills:1.20.0-beta30'
+    implementation 'dev.langchain4j:langchain4j-mcp:1.20.0-beta30'
+    implementation 'dev.langchain4j:langchain4j-open-ai:1.20.1'
+    implementation 'dev.langchain4j:langchain4j-community-dashscope:1.20.0-beta30'
+    implementation 'dev.langchain4j:langchain4j-anthropic:1.20.1'
+    implementation 'dev.langchain4j:langchain4j-google-ai-gemini:1.20.1'
+    implementation 'dev.langchain4j:langchain4j-open-ai-official:1.20.1-beta30'
+    implementation 'org.eclipse.jgit:org.eclipse.jgit:7.4.0.202509020913-r'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('compileJava') {
+    inputs.files(tasks.named('processResources'))
+}
+
+tasks.withType(Test).configureEach {
+    // Unit tests use an ephemeral key. Database tests must use the configured key.
+    if (name == 'test' && !System.getenv('MINDRAILS_PROVIDER_ENCRYPTION_KEY')) {
+        def key = new byte[32]
+        new java.security.SecureRandom().nextBytes(key)
+        environment 'MINDRAILS_PROVIDER_ENCRYPTION_KEY', key.encodeBase64().toString()
+    }
+}
+
+tasks.named('bootJar') {
+    archiveFileName = 'mindrails-backend.jar'
+}
+
+tasks.named('jar') {
+    enabled = false
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    exclude '**/Mysql*IntegrationTest.class'
+    exclude '**/Qdrant*IntegrationTest.class'
+}
+
+tasks.register('qdrantTest', Test) {
+    description = 'Tests Agent memory against local Qdrant; uses deterministic local embeddings unless explicitly enabled.'
+    group = 'verification'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    useJUnitPlatform()
+    filter { includeTestsMatching 'com.mindrails.backend.memory.agent.Qdrant*IntegrationTest' }
+    // External service/restart state must be verified on every explicit run.
+    outputs.upToDateWhen { false }
+}
+
+tasks.register('mysqlTest', Test) {
+    description = 'Tests persistence against local MySQL.'
+    group = 'verification'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    useJUnitPlatform()
+    filter {
+        includeTestsMatching 'com.mindrails.backend.identity.MysqlIdentityIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.knowledge.MysqlKnowledgeIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.asset.MysqlAssetStorageIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.asset.MysqlAssetDeduplicationIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.observability.MysqlObservabilityIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.mcp.MysqlMcpIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.metrics.MysqlMetricsIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.history.MysqlHistoryIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.memory.MysqlChatMemoryIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.persistence.MysqlRegistryIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.persistence.MysqlSessionForkIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.persistence.MysqlResourceOwnershipIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.persistence.MysqlTaskIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.provider.MysqlProviderCredentialsIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.image.MysqlImageGenerationIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.websearch.MysqlWebSearchProviderIntegrationTest'
+        includeTestsMatching 'com.mindrails.backend.memory.agent.MysqlAgentMemoryIntegrationTest'
+    }
+}
